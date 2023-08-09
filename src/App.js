@@ -1,24 +1,32 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import NavBar from './components/Navbar';
+import SideNav from './components/SideNav';
+import FeatureCreationRequest from './pages/feature-creation-request'; // Update with correct import paths
+import ModelCallRequest from './pages/model-call-request'; // Update with correct import paths
+import ModelRegistry from './pages/model-registry'; // Update with correct import paths
+import Endpoints from './pages/endpoints'; // Update with correct import paths
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App" id="outer-container">
+        <NavBar />
+        <div style={{ display: 'flex' }}>
+          <SideNav />
+          <div id="page-wrap" style={{width:'100%'}}>
+            <Routes>
+              <Route path="/" element={<FeatureCreationRequest/>} />
+              <Route path="/feature-request" element={<FeatureCreationRequest />} />
+              <Route path="/model-request" element={<ModelCallRequest />} />
+              <Route path="/model-registry" element={<ModelRegistry />} />
+              <Route path="/endpoints" element={<Endpoints />} />
+            </Routes>
+          </div>
+        </div>
+      </div>
+    </Router>
   );
 }
 
