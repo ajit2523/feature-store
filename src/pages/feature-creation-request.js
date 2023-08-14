@@ -1,182 +1,269 @@
-import React, { useState } from 'react';
 import axios from 'axios';
-import { isEmail } from 'validator';
-import Select from 'react-select';
+import { useState, useEffect } from 'react';
+import AsyncSelect from 'react-select/async';
 import './feature-creation-request.css';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 
-const attributeKeysForFeatureStore = ['Email ID'];
+const featureGenIDOptions = [
+  {
+    FeatureGenID: 'ETP_ABCD',
+    FeatureGroups: [
+      'ETP_ABCD_FG1',
+      'ETP_ABCD_FG2',
+      'ETP_ABCD_FG3',
+      'ETP_ABCD_FG4',
+    ],
+  },
+  {
+    FeatureGenID: 'ETP_BCDE',
+    FeatureGroups: ['ETP_BCDE_FG1', 'ETP_BCDE_FG2', 'ETP_BCDE_FG3'],
+  },
+  {
+    FeatureGenID: 'ETP_CDEF',
+    FeatureGroups: ['ETP_CDEF_FG1', 'ETP_CDEF_FG2', 'ETP_CDEF_FG3'],
+  },
+];
 
+const genIdOptions = featureGenIDOptions.map((featureGenIDOption) => ({
+  value: featureGenIDOption.FeatureGenID,
+  label: featureGenIDOption.FeatureGenID,
+}));
+
+const emailIdOptions = [
+  { value: 'vidit.ostwal@piramal.com', label: 'vidit.ostwal@piramal.com' },
+  { value: 'nirmalya.mukherjee@piramal.com', label: 'nirmalya.mukherjee@piramal.com' },
+  { value: 'yajamanyam.darahaas@piramal.com', label: 'yajamanyam.darahaas@piramal.com' },
+  { value: 'subramanian.v@piramal.com', label: 'subramanian.v@piramal.com' },
+];
+
+const defaultEmailID = 'ajit.bhosale@piramal.com';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#B15D21',
+    },
+  },
+});
 
 const FeatureCreationRequest = () => {
-  // const [featureGenID, setFeatureGenID] = useState('');
-  // const genIdOptions = axios.get('http://localhost:3001/notes')
-  // return (
-  //   <div>
-  //     <Select
-  //       id="dropdown"
-  //       value={featureGenID || ""}
-  //       onChange={(e) => setFeatureGenID(e.target.value)}
-  //       options={Object.keys(genIdOptions).map((key) => ({ value: key, label: key }))}
+  const [featureGenID, setFeatureGenID] = useState();
+  const [featureGroups, setFeatureGroups] = useState([]);
+  const [emailID, setEmailID] = useState([defaultEmailID]);
+  const [batchIDs, setBatchIDs] = useState({});
 
-  //     >
-  //       {/* <option value="">Select from the options</option> */}
-  //       <option value="" disabled={featureGenID !== null}>Select from the options</option>
-  //       <option value="ETP_DEROGS_BATCH">ETP_DEROGS_BATCH</option>
-  //       <option value="NTP_PAISABAZAR_DEROGS_BATCH">NTP_PAISABAZAR_DEROGS_BATCH</option>
-  //     </Select>
-  //   </div>
-  // );
-  const [attributeValues, setAttributeValues] = useState(
-    attributeKeysForFeatureStore.reduce((acc, key) => ({ ...acc, [key]: '' }), {})
-  );
-  const [response, setResponse] = useState('');
-  const [selectedOption, setSelectedOption] = useState('Feature Store');
-  const [selectedGenID, setSelectedGenID] = useState(null);
-  const [selectedAPIURL, setSelectedAPIURL] = useState('https://biuuatapi.piramalfinance.com/feature-store/feature-store-resource');
-  const [genIdOptions, setGenIdOptions] = useState({
-    ETP_DEROGS_BATCH: {
-      DEROGS_FEATURES_ETP_0: '',
-      DEROGS_FEATURES_ETP_1: '',
-      DEROGS_FEATURES_ETP_2: '',
-      DEROGS_FEATURES_ETP_3: ''
-    }, 
-    NTP_PAISABAZAR_DEROGS_BATCH: {
-      PAISABAZAR_DEROGS_NTP_0: '',
-      PAISABAZAR_DEROGS_NTP_1: '',
-      PAISABAZAR_DEROGS_NTP_2: ''
+  const fetchFeatureGroups = (selectedFeatureGenID) => {
+    const selectedOption = featureGenIDOptions.find(
+      (option) => option.FeatureGenID === selectedFeatureGenID
+    );
+
+    return selectedOption ? selectedOption.FeatureGroups : [];
+  };
+
+  useEffect(() => {
+    console.log(featureGenID);
+    setFeatureGroups(fetchFeatureGroups(featureGenID));
+  }, [featureGenID]);
+
+  useEffect(() => {
+    console.log(featureGroups);
+    setBatchIDs({});
+  }, [featureGroups]);
+
+  useEffect(() => {
+    console.log(emailID);
+  }, [emailID]);
+
+  const handleEmailIDChange = (selectedOptions) => {
+    const selectedEmailIDs = selectedOptions.map((x) => x.value);
+    selectedEmailIDs.unshift(defaultEmailID);
+    setEmailID(selectedEmailIDs);
+  };
+
+  const filterEmailIdOptions = (inputValue) => {
+    return emailIdOptions.filter(i =>
+      i.label.toLowerCase().includes(inputValue.toLowerCase())
+    );
+  }
+
+  const handleBatchIDChange = (featureGroup, batchID) => {
+    setBatchIDs((prevBatchIDs) => ({
+      ...prevBatchIDs,
+      [featureGroup]: batchID,
+    }));
+  };
+
+  const handleSubmit = () => {
+    // Check if batch IDs are saved for all feature groups
+    const isBatchIDsComplete = featureGroups.every(
+      (featureGroup) => batchIDs[featureGroup]
+    );
+
+    if (!isBatchIDsComplete) {
+      alert('Please enter batch IDs for all the feature groups.');
+      return;
     }
-  });
-  const [emailIds, setEmailIds] = useState(['ajit.bhosale@piramal.com']);
 
-  const handleInputChange = (key, value, parentId) => {
-    setAttributeValues((prevValues) => ({ ...prevValues, [key]: value }));
-    setGenIdOptions((prevValues) => {
-      return {
-        ...prevValues,
-        [parentId]: { ...prevValues[parentId], [key]: value }
-      };
+    const featureGroupsData = {};
+    featureGroups.forEach((featureGroup) => {
+      featureGroupsData[featureGroup] = batchIDs[featureGroup] || '';
     });
+
+    const postData = {
+      uniqueIdentifier: featureGroupsData,
+      email: defaultEmailID,
+      secondaryEmail: emailID.slice(1),
+      featureGenID: featureGenID,
+    };
+
+    console.log(postData);
+
+
+    axios
+      .post('http://localhost:5000/feature-creation-request', postData)
+      .then(
+        (response) => {
+          console.log(response);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
   };
-
-  const handleSend = async () => {
-    try {
-      const requestBody = JSON.stringify(genIdOptions[selectedGenID]);
-
-      const response = await axios.post(selectedAPIURL, requestBody);
-
-      setResponse(JSON.stringify(response.data, null, 2));
-    } catch (error) {
-      setResponse(`Error: ${error.message}`);
-    }
-  };
-
-  const handleEmailIdChange = (index, event) => {
-    let emails = [...emailIds];
-    emails[index] = event.target.value;
-    setEmailIds(emails);
-  };
-
-  const addEmailId = () => {
-    const lastIndex = emailIds.length - 1;
-    const lastEmailId = emailIds[lastIndex];
-
-    if (isEmail(lastEmailId)) {
-      setEmailIds([...emailIds, '']);
-    } else {
-      alert('Please enter a valid email id');
-    }
-  };
-
-  // const loadOptions = (inputValue, callback) => {
-  //   setTimeout(() => {
-  //     const filteredOptions = aquaticCreatures.filter((option) =>
-  //       option.label.toLowerCase().includes(inputValue.toLowerCase())
-  //     );
-  //     callback(filteredOptions);
-  //   }, 1); // Simulate a 1-milisecond delay for demonstration purposes
-  // };
-
 
   return (
-    <div className="FeatureCreationRequest">
-      
-      {/* <div className="dropdown-section-0">
-        <label htmlFor="dropdown">Select from:</label>
-        <Select
-          id="dropdown"
-          value={selectedOption}
-          onChange={(e) => setSelectedOption(e.target.value)}
-        >
-          <option value="Feature Store">Feature Store</option>
-          <option value="MLOps">MLOps</option>
-        </Select>
-      </div> */}
-      <div className="input-section">
-        {/* <label htmlFor="dropdown">Select Feature Gen ID:</label> */}
-        <Select
-          id="dropdown"
-          value={selectedGenID || ""}
-          onChange={(e) => setSelectedGenID(e.target.value)}
-          options={Object.keys(genIdOptions).map((key) => ({ value: key, label: key }))}
-          placeholder="Select a Feature Generation ID"
-        >
-          {/* <option value="">Select from the options</option> */}
-          <option value="" disabled={selectedGenID !== null}>Select from the options</option>
-          <option value="ETP_DEROGS_BATCH">ETP_DEROGS_BATCH</option>
-          <option value="NTP_PAISABAZAR_DEROGS_BATCH">NTP_PAISABAZAR_DEROGS_BATCH</option>
-        </Select>
-      </div>
-      <div className="input-section">
-        {/* <label htmlFor="dropdown">Select Environment:</label> */}
-        <Select
-          id="dropdown"
-          value={selectedAPIURL}
-          onChange={(e) => setSelectedAPIURL(e.target.value)}
-          options={[{label: "UAT - https://biuuatapi.piramalfinance.com/feature-store/feature-store-resource", value: "https://biuuatapi.piramalfinance.com/feature-store/feature-store-resource"}, {label: "PROD - https://biuprodapi.piramalfinance.com/feature-store/feature-store-resource", value: "https://biuprodapi.piramalfinance.com/feature-store/feature-store-resource"}]}
+    <div className="feature-creation-request">
+      <AsyncSelect
+        className="feature-dropdown"
+        cacheOptions
+        loadOptions={(inputValue, callback) => {
+          setTimeout(() => {
+            callback(
+              genIdOptions.filter((i) =>
+                i.label.toLowerCase().includes(inputValue.toLowerCase())
+              )
+            );
+          }, 0);
+        }}
+        onChange={(selectedOption) => {
+          setFeatureGenID(selectedOption ? selectedOption.value : '');
+        }}
+        placeholder="Select Feature Gen ID"
+        noOptionsMessage={() => 'Start typing to find the feature generation ID'}
+        isClearable
+        backspaceRemovesValue
+        styles={{
+          menu: (provided) => ({
+            ...provided,
+            zIndex: 1001,
+            position: 'relative',
+          }),
+        }}
+      />
 
-        />
-      </div>
-      {selectedGenID 
-        && Object.keys(genIdOptions[selectedGenID]).map((key) => (
-      <div className="input-section" key={key}>
-        <label htmlFor={key}>{key}:</label>
-        <input
-          type="text"
-          id={key}
-          value={genIdOptions[selectedGenID][key]}
-          onChange={(e) => handleInputChange(key, e.target.value, selectedGenID)}
-          placeholder={`Enter value for ${key}`}
-        />
-      </div>
-        
-      ))}
-      {emailIds.map((emailId, index) => {
-        return (
-          <div className="email-wrapper" key={index}>
-          <label htmlFor={`email_${index}`}>Email ID {index + 1}:</label>
-          <div className="email-input-section">
-            <input
-              id={`email_${index}`}
-              className={`email-input-${isEmail(emailId) ? '' : 'invalid'}`}
-              value={emailId}
-              onChange={(e) => handleEmailIdChange(index, e)}
-              placeholder={`Enter Email ID ${index + 1}`}
-            />
-            {index === emailIds.length - 1 && (
-              <button type="button" className="add-email-button" onClick={addEmailId}>+</button>
-            )}
-          </div>
-        </div>
+      {/* Make a table with two columns. One for feature group, another for batch id. For each feature group, user will input the batch id in the table */}
+      {featureGroups.length > 0 &&
+        <TableContainer component={Paper} className='table'>
+          <Table sx={{ minWidth: 650 }} aria-label="simple table" size='small'>
+            <TableHead>
+              {/* add border to table head */}
+              <TableRow>
+                <TableCell align='center' sx={{ backgroundColor: '#F2EDE6', color: '#B15D21' }}><h3>Feature Group</h3></TableCell>
+                <TableCell align="center" sx={{ backgroundColor: '#F2EDE6', color: '#B15D21' }}><h3>Batch ID</h3></TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {featureGroups.map((featureGroup) => (
+                <TableRow
+                  key={featureGroup}
+                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row" align='center'>
+                    {featureGroup}
+                  </TableCell>
+                  <TableCell align="center">
+                    <TextField
+                      id={`batch-id-${featureGroup}`}
+                      label="Batch ID"
+                      fullWidth
+                      value={batchIDs[featureGroup] || ''}
+                      onChange={(event) =>
+                        handleBatchIDChange(featureGroup, event.target.value)
+                      }
+                      size="small"
+                      variant="outlined"
+                    />
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>}
 
-      )}
-      )}
-      <button onClick={handleSend}>Send</button>
-      {response && (
-        <div className="response-box">
-          <label>Response:</label>
-          <pre>{response}</pre>
-        </div>
-      )}
+      <Box
+        className="email-id-default"
+        component="form"
+        sx={{
+          '& .MuiTextField-root': { width: '100%' },
+        }}
+        noValidate
+        autoComplete="off"
+      >
+        <>
+          <TextField
+            disabled
+            id="outlined-disabled"
+            label="default"
+            defaultValue={defaultEmailID}
+            size="small"
+          />
+        </>
+      </Box>
+
+      <AsyncSelect
+        className="feature-dropdown"
+        cacheOptions
+        loadOptions={(inputValue, callback) => {
+          setTimeout(() => {
+            callback(
+              filterEmailIdOptions(inputValue).filter(
+                (option) => option.value !== defaultEmailID
+              )
+            );
+          }, 0);
+        }}
+        onChange={handleEmailIDChange}
+        isMulti
+        placeholder="Select secondary email ID"
+        backspaceRemovesValue
+        styles={{
+          menu: (provided) => ({
+            ...provided,
+            zIndex: 1001,
+            position: 'relative',
+          }),
+        }}
+      />
+
+      <ThemeProvider theme={theme}>
+        <Button
+          variant="contained"
+          className="submit-button"
+          onClick={handleSubmit}
+        >
+          Submit
+        </Button>
+      </ThemeProvider>
     </div>
   );
 };

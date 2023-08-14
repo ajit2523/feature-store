@@ -15,7 +15,7 @@ function App() {
         <NavBar />
         <div style={{ display: 'flex' }}>
           <SideNav />
-          <div id="page-wrap" style={{width:'100%'}}>
+          <div id="page-wrap">
             <Routes>
               <Route path="/" element={<FeatureCreationRequest/>} />
               <Route path="/feature-request" element={<FeatureCreationRequest />} />
