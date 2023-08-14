@@ -28,7 +28,7 @@ const emailIdOptions = [
 const theme = createTheme({
   palette: {
     primary: {
-      main:'#B15D21'
+      main:'#E77864'
     }
   },
 });
