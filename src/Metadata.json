@@ -1,0 +1,411 @@
+{
+    "FEATURE_GEN_ID": {
+        "GEN_ID_LIST": [
+            "ETP_DEROGS_BATCH",
+            "NTP_PAISABAZAR_DEROGS_BATCH"
+        ],
+        "ETP_DEROGS_BATCH": {
+            "GROUP_IDS": [
+                "DEROGS_FEATURES_ETP"
+            ],
+            "OWNER": [
+                "ravi.shankar@piramal.com",
+                "rohit.rai2@piramal.com"
+            ]
+        },
+        "NTP_PAISABAZAR_DEROGS_BATCH": {
+            "GROUP_IDS": [
+                "PAISABAZAR_DEROGS_NTP"
+            ],
+            "OWNER": [
+                "ravi.shankar@piramal.com",
+                "santhosh.udupa@piramal.com"
+            ]
+        }
+    },
+    "FEATURE_GROUPS": {
+        "DEROGS_FEATURES_ETP": {
+            "FEATURES_LIST": [
+                "LIVE_SEC_MAX_24MO",
+                "CLOSED_SEC_MAX_24MO",
+                "CURR_0FLAG",
+                "CURR_15FLAG",
+                "L3M30+_FLAG",
+                "L3M60+_FLAG",
+                "L3M90+_FLAG",
+                "L6M30+_FLAG",
+                "L6M60+_FLAG",
+                "L6M90+_FLAG",
+                "L12M30+_FLAG",
+                "L12M60+_FLAG",
+                "L12M90+_FLAG",
+                "CURR_0_LIVE_SEC",
+                "CURR_0_LIVE_UNSEC",
+                "6MO_30_LIVE_SEC",
+                "6MO_30_LIVE_UNSEC",
+                "12MO_90_LIVE_SEC",
+                "12MO_90_LIVE_UNSEC",
+                "12MO_30_LIVE_SEC",
+                "24MO_90_LIVE_UNSEC",
+                "CURR_0_CLOSED_SEC",
+                "CURR_0_CLOSED_UNSEC",
+                "6MO_30_CLOSED_SEC",
+                "6MO_30_CLOSED_UNSEC",
+                "12MO_90_CLOSED_SEC",
+                "12MO_90_CLOSED_UNSEC",
+                "12MO_30_CLOSED_SEC",
+                "24MO_90_CLOSED_UNSEC",
+                "SETTLEMENT_FLAG",
+                "OVER_DUE_AMOUNT",
+                "OTHER_FLAG",
+                "SCORE",
+                "WRITE_OFF_FLAG",
+                "RESTRUCTURED_FLAG",
+                "SUIT_WILFULFLAG",
+                "MAX_MOR_OD",
+                "MAX_NON_MOR_OD",
+                "WRITE_OFF_MORT_LASTDT",
+                "WRITE_OFF_CC_LASTDT",
+                "WRITE_OFF_ALL_LASTDT",
+                "SETTLEMENT_FLAG_MORT_5Y",
+                "SETTLEMENT_FLAG_CC_3Y",
+                "CURRENT_TOTAL_EMI",
+                "HL_OBL_FLAG",
+                "BUREAU_THICKNESS",
+                "ETP_HL_LAP_INCOME",
+                "MAX_EMI",
+                "NTP_HL_LAP_INCOME",
+                "CREDIT_LIMIT_INCOME",
+                "L3Y_EMI_INCOME",
+                "CURRENT_OBLIGATIONS_INCOME"
+            ],
+            "FEATURE_GROUP_DESCRIPTION": "",
+            "LIVE_SEC_MAX_24MO": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "CLOSED_SEC_MAX_24MO": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "CURR_0FLAG": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "CURR_15FLAG": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "L3M30+_FLAG": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "L3M60+_FLAG": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "L3M90+_FLAG": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "L6M30+_FLAG": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "L6M60+_FLAG": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "L6M90+_FLAG": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "L12M30+_FLAG": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "L12M60+_FLAG": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "L12M90+_FLAG": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "CURR_0_LIVE_SEC": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "CURR_0_LIVE_UNSEC": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "6MO_30_LIVE_SEC": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "6MO_30_LIVE_UNSEC": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "12MO_90_LIVE_SEC": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "12MO_90_LIVE_UNSEC": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "12MO_30_LIVE_SEC": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "24MO_90_LIVE_UNSEC": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "CURR_0_CLOSED_SEC": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "CURR_0_CLOSED_UNSEC": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "6MO_30_CLOSED_SEC": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "6MO_30_CLOSED_UNSEC": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "12MO_90_CLOSED_SEC": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "12MO_90_CLOSED_UNSEC": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "12MO_30_CLOSED_SEC": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "24MO_90_CLOSED_UNSEC": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "SETTLEMENT_FLAG": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "OVER_DUE_AMOUNT": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "OTHER_FLAG": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "SCORE": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "WRITE_OFF_FLAG": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "RESTRUCTURED_FLAG": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "SUIT_WILFULFLAG": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "MAX_MOR_OD": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "MAX_NON_MOR_OD": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "WRITE_OFF_MORT_LASTDT": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "WRITE_OFF_CC_LASTDT": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "WRITE_OFF_ALL_LASTDT": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "SETTLEMENT_FLAG_MORT_5Y": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "SETTLEMENT_FLAG_CC_3Y": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "CURRENT_TOTAL_EMI": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "HL_OBL_FLAG": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "BUREAU_THICKNESS": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "ETP_HL_LAP_INCOME": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "MAX_EMI": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "NTP_HL_LAP_INCOME": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "CREDIT_LIMIT_INCOME": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "L3Y_EMI_INCOME": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            },
+            "CURRENT_OBLIGATIONS_INCOME": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-04T00:00:00Z"
+            }
+        },
+        "PAISABAZAR_DEROGS_NTP": {
+            "FEATURES_LIST": [
+                "HARD_DEROGS",
+                "WRITTEN_OFF",
+                "SUIT_FILED",
+                "WILFUL_DEFAULT",
+                "SETTLED",
+                "CURR_0",
+                "12MO_30",
+                "24MO_90",
+                "MORT_FLAG",
+                "NON_MORT_FLAG"
+            ],
+            "FEATURE_GROUP_DESCRIPTION": "Builds derogs features for New to Piramal cutomers received through Paisa bazaar.",
+            "HARD_DEROGS": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-06T00:00:00Z"
+            },
+            "WRITTEN_OFF": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-06T00:00:00Z"
+            },
+            "SUIT_FILED": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-06T00:00:00Z"
+            },
+            "WILFUL_DEFAULT": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-06T00:00:00Z"
+            },
+            "SETTLED": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-06T00:00:00Z"
+            },
+            "CURR_0": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-06T00:00:00Z"
+            },
+            "12MO_30": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-06T00:00:00Z"
+            },
+            "24MO_90": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-06T00:00:00Z"
+            },
+            "MORT_FLAG": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-06T00:00:00Z"
+            },
+            "NON_MORT_FLAG": {
+                "ACTIVE_FLAG": "Y",
+                "DESCRIPTION": "",
+                "LAST_REFRESH_DATE": "2023-07-06T00:00:00Z"
+            }
+        }
+    },
+    "REFRESH_DATE": "2023-08-02 14:01"
+}

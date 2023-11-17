@@ -3,10 +3,13 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavBar from './components/Navbar';
 import SideNav from './components/SideNav';
-import FeatureCreationRequest from './pages/feature-creation-request'; // Update with correct import paths
-import ModelCallRequest from './pages/model-call-request'; // Update with correct import paths
-import ModelRegistry from './pages/model-registry'; // Update with correct import paths
-import Endpoints from './pages/endpoints'; // Update with correct import paths
+import FeatureGenerationRequest from './pages/feature-generation-request'; 
+import ModelCallRequest from './pages/model-call-request'; 
+import FeatureStoreMetadata from './pages/feature-store-metadata';
+import MlopsMetadata from './pages/mlops-metadata';
+import Search from './pages/search';
+import Runs from './pages/runs';
+import Jobs from './pages/jobs';
 
 function App() {
   return (
@@ -17,11 +20,14 @@ function App() {
           <SideNav />
           <div id="page-wrap">
             <Routes>
-              <Route path="/" element={<FeatureCreationRequest/>} />
-              <Route path="/feature-request" element={<FeatureCreationRequest />} />
-              <Route path="/model-request" element={<ModelCallRequest />} />
-              <Route path="/model-registry" element={<ModelRegistry />} />
-              <Route path="/endpoints" element={<Endpoints />} />
+              <Route path="/" element={<FeatureGenerationRequest/>} />
+              <Route path="/feature-generation-request" element={<FeatureGenerationRequest />} />
+              <Route path="/model-call-request" element={<ModelCallRequest />} />
+              <Route path="/feature-store-metadata" element={<FeatureStoreMetadata />} />
+              <Route path="/mlops-metadata" element={<MlopsMetadata />} />
+              <Route path="/search" element={<Search />} />
+              <Route path="/jobs" element={<Jobs />} />
+              <Route path="/runs" element={<Runs />} />
             </Routes>
           </div>
         </div>

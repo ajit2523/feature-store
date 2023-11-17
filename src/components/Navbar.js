@@ -1,22 +1,31 @@
 import React from "react";
 import './Navbar.css'
+import { Avatar } from "@mui/material";
+import UserAvatar from "./UserAvatar";
+
+let emailID = 'ajit.bhosale@piramal.com'
+
+export const setEmailID = (userEmail) => {
+  emailID = userEmail;
+};
 
 const Navbar = () => {
     return (
         <nav className="navbar">
             {/* Logo */}
             <div className="logo">
-                <img src={require('./Piramal-Finance-Logo.png')} alt="Company Logo" />
+                <img src={require('./Piramal-Finance-Logo-removebg-preview.png')} alt="Company Logo" />
             </div>
 
             {/* Search Bar */}
-            <div className="search-bar">
+            {/* <div className="search-bar">
                 <input type="text" placeholder="Search for feature group / feature view" />
-            </div>
+            </div> */}
 
             {/* Right Content (Placeholder) */}
             <div className="right-content">
-                {/* Add your content here */}
+                {emailID}
+                <UserAvatar emailID={emailID}/>    
             </div>
         </nav>
     );

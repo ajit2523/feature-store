@@ -63,3 +63,8 @@ li:hover {
     background-color: #f2ede6;
 }
 
+.active {
+    color: #B15D21;
+    background-color: #f2ede6;
+}
+

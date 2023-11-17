@@ -1,4 +1,4 @@
-.FeatureCreationRequest {
+.FeatureGenerationRequest {
     width: auto;
     margin: 0 auto;
     padding: 50px;
@@ -24,4 +24,9 @@
     width: 100%;
     margin-bottom: 20px;
     text-align: left;
+}
+
+.response {
+    margin-top: 20px;
+    margin-bottom: 20px;
 }

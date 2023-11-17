@@ -3,14 +3,15 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #ffffff;
+  background-color: #f2ede6;
   height: 86px;
   padding: 0 20px;
   border-bottom: 0.8px solid #E2E2E2;
 }
 
 .logo img {
-  height: 60px; /* Adjust the logo height as needed */
+  height: 60px;
+  /* Adjust the logo height as needed */
 }
 
 .search-bar {
@@ -29,5 +30,6 @@
 }
 
 .right-content {
-  /* Add any styling you want for the right content here */
+  display: flex;
+  align-items: center;
 }

@@ -23,12 +23,14 @@ const emailIdOptions = [
   { value: 'vidit.ostwal@piramal.com', label: 'vidit.ostwal@piramal.com' },
   { value: 'nirmalya.mukherjee@piramal.com', label: 'nirmalya.mukherjee@piramal.com' },
   { value: 'yajamanyam.darahaas@piramal.com', label: 'yajamanyam.darahaas@piramal.com' },
-  { value: 'subramanian.v@piramal.com', label: 'subramanian.v@piramal.com' }]
+  { value: 'subramanian.v@piramal.com', label: 'subramanian.v@piramal.com' },
+  { value: 'kaushik.deb@piramal.com', label: 'kaushik.deb@piramal.com' }
+]
 
 const theme = createTheme({
   palette: {
     primary: {
-      main:'#E77864'
+      main:'#ea4022'
     }
   },
 });
@@ -146,6 +148,7 @@ const ModelCallRequest = () => {
         options={versionOptions}
         onChange={handleVersionChange}
         placeholder='Select version'
+        isClearable
         backspaceRemovesValue
         styles={{
           menu: (provided) => ({

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import AsyncSelect from 'react-select/async';
-import './feature-creation-request.css';
+import './feature-generation-request.css';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -16,21 +16,14 @@ import Paper from '@mui/material/Paper';
 
 const featureGenIDOptions = [
   {
-    FeatureGenID: 'ETP_ABCD',
+    FeatureGenID: 'ETP_DEROGS_BATCH',
     FeatureGroups: [
-      'ETP_ABCD_FG1',
-      'ETP_ABCD_FG2',
-      'ETP_ABCD_FG3',
-      'ETP_ABCD_FG4',
+      'DEROGS_FEATURES_ETP'
     ],
   },
   {
-    FeatureGenID: 'ETP_BCDE',
-    FeatureGroups: ['ETP_BCDE_FG1', 'ETP_BCDE_FG2', 'ETP_BCDE_FG3'],
-  },
-  {
-    FeatureGenID: 'ETP_CDEF',
-    FeatureGroups: ['ETP_CDEF_FG1', 'ETP_CDEF_FG2', 'ETP_CDEF_FG3'],
+    FeatureGenID: 'NTP_PARTNER_DEROGS_BATCH',
+    FeatureGroups: ['PARTNER_DEROGS_NTP'],
   },
 ];
 
@@ -44,6 +37,7 @@ const emailIdOptions = [
   { value: 'nirmalya.mukherjee@piramal.com', label: 'nirmalya.mukherjee@piramal.com' },
   { value: 'yajamanyam.darahaas@piramal.com', label: 'yajamanyam.darahaas@piramal.com' },
   { value: 'subramanian.v@piramal.com', label: 'subramanian.v@piramal.com' },
+  { value: 'kaushik.deb@piramal.com', label: 'kaushik.deb@piramal.com' }
 ];
 
 const defaultEmailID = 'ajit.bhosale@piramal.com';
@@ -51,16 +45,17 @@ const defaultEmailID = 'ajit.bhosale@piramal.com';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#E77864',
+      main: '#ea4022',
     },
   },
 });
 
-const FeatureCreationRequest = () => {
+const FeatureGenerationRequest = () => {
   const [featureGenID, setFeatureGenID] = useState();
   const [featureGroups, setFeatureGroups] = useState([]);
   const [emailID, setEmailID] = useState([defaultEmailID]);
   const [batchIDs, setBatchIDs] = useState({});
+  const [response, setResponse] = useState(null);
 
   const fetchFeatureGroups = (selectedFeatureGenID) => {
     const selectedOption = featureGenIDOptions.find(
@@ -122,7 +117,7 @@ const FeatureCreationRequest = () => {
     const postData = {
       uniqueIdentifier: featureGroupsData,
       email: defaultEmailID,
-      secondaryEmail: emailID.slice(1),
+      // secondaryEmail: emailID.slice(1),
       featureGenID: featureGenID,
     };
 
@@ -130,9 +125,10 @@ const FeatureCreationRequest = () => {
 
 
     axios
-      .post('http://localhost:5000/feature-creation-request', postData)
+      .post('https://biuprodapi.piramalfinance.com/feature-store/feature-store-resource', postData)
       .then(
         (response) => {
+          setResponse(response.data);
           console.log(response);
         },
         (error) => {
@@ -264,8 +260,17 @@ const FeatureCreationRequest = () => {
           Submit
         </Button>
       </ThemeProvider>
+
+      {response && (
+        <div className="response">
+          <Box sx={{ border: 1, borderRadius: 1.5, borderColor: 'grey' }}>
+            <h3>Response</h3>
+            <pre>{JSON.stringify(response, null, 2)}</pre>
+          </Box>
+        </div>
+      )}
     </div>
   );
 };
 
-export default FeatureCreationRequest;
+export default FeatureGenerationRequest;
