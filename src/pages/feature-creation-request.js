@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import AsyncSelect from 'react-select/async';
-import './feature-generation-request.css';
+import './feature-creation-request.css';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -50,7 +50,7 @@ const theme = createTheme({
   },
 });
 
-const FeatureGenerationRequest = () => {
+const FeatureCreationRequest = () => {
   const [featureGenID, setFeatureGenID] = useState();
   const [featureGroups, setFeatureGroups] = useState([]);
   const [emailID, setEmailID] = useState([defaultEmailID]);
@@ -155,7 +155,7 @@ const FeatureGenerationRequest = () => {
           setFeatureGenID(selectedOption ? selectedOption.value : '');
         }}
         placeholder="Select Feature Gen ID"
-        noOptionsMessage={() => 'Start typing to find the feature generation ID'}
+        noOptionsMessage={() => 'Start typing to find the feature creation ID'}
         isClearable
         backspaceRemovesValue
         styles={{
@@ -174,8 +174,8 @@ const FeatureGenerationRequest = () => {
             <TableHead>
               {/* add border to table head */}
               <TableRow>
-                <TableCell align='center' sx={{ backgroundColor: '#F2EDE6', color: '#B15D21' }}><h3>Feature Group</h3></TableCell>
-                <TableCell align="center" sx={{ backgroundColor: '#F2EDE6', color: '#B15D21' }}><h3>Batch ID</h3></TableCell>
+                <TableCell align='center' sx={{ backgroundColor: '#FAEEEE', color: '#CB0000' }}><h3>Feature Group</h3></TableCell>
+                <TableCell align="center" sx={{ backgroundColor: '#FAEEEE', color: '#CB0000' }}><h3>Batch ID</h3></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -273,4 +273,4 @@ const FeatureGenerationRequest = () => {
   );
 };
 
-export default FeatureGenerationRequest;
+export default FeatureCreationRequest;

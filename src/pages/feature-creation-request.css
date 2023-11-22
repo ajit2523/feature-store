@@ -1,4 +1,4 @@
-.FeatureCreationRequest {
+.FeaturecreationRequest {
     width: auto;
     margin: 0 auto;
     padding: 50px;
@@ -7,20 +7,26 @@
     border-radius: 8px;
 }
 
-.model-dropdown {
+.feature-dropdown {
     width: 100%;
     margin-bottom: 20px;
     text-align: left;
 }
 
-.version-dropdown {
+.table {
     width: 100%;
     margin-bottom: 20px;
     text-align: left;
+    border: 1px solid #ddd;
 }
 
 .email-id-default {
     width: 100%;
     margin-bottom: 20px;
     text-align: left;
+}
+
+.response {
+    margin-top: 20px;
+    margin-bottom: 20px;
 }

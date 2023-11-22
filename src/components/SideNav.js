@@ -2,14 +2,16 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './SideNav.css';
-import { LiaToolsSolid } from 'react-icons/lia';
-import { BiSolidNetworkChart } from 'react-icons/bi';
+import { IoShapesOutline } from "react-icons/io5";
 import { IconContext } from "react-icons";
 import { BsListNested } from 'react-icons/bs';
-import { VscGroupByRefType } from 'react-icons/vsc';
-import { AiOutlineFileSearch } from 'react-icons/ai';
+import { HiOutlineSquare2Stack } from "react-icons/hi2";
 import { PiSuitcaseSimpleLight } from 'react-icons/pi';
-import { GiProcessor } from 'react-icons/gi';
+import { TiArrowRepeat } from "react-icons/ti";
+import { RiBarChartHorizontalFill } from "react-icons/ri";
+import { RiTestTubeLine } from "react-icons/ri";
+import { RxCrossCircled } from "react-icons/rx";
+
 
 const SideNav = () => {
   const location = useLocation();
@@ -18,61 +20,56 @@ const SideNav = () => {
     <aside className="side-nav">
       <IconContext.Provider value={{ className: 'react-icons' }}>
         <div className="group">
-          <h2>Feature Store & MLOps</h2>
+          <h2>FEATURE STORE</h2>
           <ul>
-            <Link to="/feature-generation-request">
-              <li className={location.pathname === '/feature-generation-request' ? 'active' : ''}>
-                <LiaToolsSolid /> Feature Generation Request
+            <Link to="/feature-creation-request">
+              <li className={location.pathname === '/feature-creation-request' ? 'active' : ''}>
+              <IoShapesOutline /> Feature Creation Request
               </li>
-            </Link>
-            <Link to="/model-call-request">
-              <li className={location.pathname === '/model-call-request' ? 'active' : ''}>
-              <BiSolidNetworkChart /> Model Call Request
-              </li >
             </Link>
             <Link to="/feature-store-metadata">
               <li className={location.pathname === '/feature-store-metadata' ? 'active' : ''}>
-              <VscGroupByRefType /> Feature Store Metadata
+              <HiOutlineSquare2Stack /> FS Metadata
               </li >
             </Link>
-            <Link to="/mlops-metadata">
-              <li className={location.pathname === '/mlops-metadata' ? 'active' : ''}>
-              <BsListNested /> MLOps Metadata
+            <Link to="/online-fs-details">
+              <li className={location.pathname === '/online-fs-details' ? 'active' : ''}>
+              <BsListNested /> Online FS Details
               </li >
             </Link>
           </ul>
         </div>
-        {/* <div className="group">
-          <h2>MLOps</h2>
+        <div className="group">
+          <h2>ML-OPS</h2>
           <ul>
-            <Link to="/model-registry">
-              <li className={location.pathname === '/model-registry' ? 'active' : ''}>
-                <GiBookPile /> Model Registry
+            <Link to="/realtime">
+              <li className={location.pathname === '/realtime' ? 'active' : ''}>
+                <TiArrowRepeat /> Realtime
               </li>
             </Link>
-            <Link to="/endpoints">
-              <li className={location.pathname === '/endpoints' ? 'active' : ''}>
-                <BiSolidNetworkChart /> Endpoints
+            <Link to="/batch">
+              <li className={location.pathname === '/batch' ? 'active' : ''}>
+                <RiBarChartHorizontalFill /> Batch
+              </li>
+            </Link>
+            <Link to="/test">
+              <li className={location.pathname === '/test' ? 'active' : ''}>
+                <RiTestTubeLine /> Test
               </li>
             </Link>
           </ul>
-        </div> */}
+        </div>
         <div className="group">
-          <h2>History & Performance</h2>
+          <h2>HISTORY / PERFORMANCE</h2>
           <ul>
-            <Link to="/search">
-              <li className={location.pathname === '/search' ? 'active' : ''}>
-                <AiOutlineFileSearch /> Search
-              </li>
-            </Link>
-            <Link to="/jobs">
-              <li className={location.pathname === '/jobs' ? 'active' : ''}>
-                <PiSuitcaseSimpleLight /> Jobs
+            <Link to="/job-status">
+              <li className={location.pathname === '/job-status' ? 'active' : ''}>
+                <PiSuitcaseSimpleLight /> Job Status
               </li >
             </Link>
-            <Link to="/runs">
-              <li className={location.pathname === '/runs' ? 'active' : ''}>
-                <GiProcessor /> Runs
+            <Link to="/failed-jobs">
+              <li className={location.pathname === '/failed-jobs' ? 'active' : ''}>
+                <RxCrossCircled /> Failed Jobs
               </li >
             </Link>
           </ul>

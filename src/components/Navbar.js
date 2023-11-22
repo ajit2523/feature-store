@@ -15,8 +15,9 @@ const Navbar = () => {
             {/* Logo */}
             <div className="logo">
                 <img src={require('./Piramal-Finance-Logo-removebg-preview.png')} alt="Company Logo" />
+                {/* <h3>MLOPS - FEATURE STORE</h3> */}
             </div>
-
+            
             {/* Search Bar */}
             {/* <div className="search-bar">
                 <input type="text" placeholder="Search for feature group / feature view" />
