@@ -13,9 +13,10 @@ const Navbar = () => {
     return (
         <nav className="navbar">
             {/* Logo */}
-            <div className="logo">
-                <img src={require('./Piramal-Finance-Logo-removebg-preview.png')} alt="Company Logo" />
-                {/* <h3>MLOPS - FEATURE STORE</h3> */}
+            <div className="logo" style={{display: 'flex', justifyContent: 'center', flexDirection: 'row'}}>
+                <img className='img-logo' src={require('./Piramal-Finance-Logo-removebg-preview.png')} alt="Company Logo" />
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <h3>MLOPS - FEATURE STORE</h3>
             </div>
             
             {/* Search Bar */}

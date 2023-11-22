@@ -35,3 +35,8 @@
   display: flex;
   align-items: center;
 }
+
+.img-logo {
+  /* make the image completely white */
+  filter: grayscale();
+}
