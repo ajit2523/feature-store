@@ -1,0 +1,13 @@
+.fs-metadata {
+    text-align: left;
+}
+
+.dropdown {
+    margin-bottom: 10px;
+}
+
+.sql-query-card {
+    /* max-width: 1117.74px */
+    font-family: 'Fira Code';
+    background-color: antiquewhite;
+}

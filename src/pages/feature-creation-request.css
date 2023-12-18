@@ -1,23 +1,21 @@
 .FeaturecreationRequest {
-    width: auto;
+    width: 100%;
     margin: 0 auto;
     padding: 50px;
-    background-color: #f9f9f9;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
 }
 
-.feature-dropdown {
+.feature-gen-id-dropdown {
     width: 100%;
-    margin-bottom: 20px;
     text-align: left;
+    margin-bottom: 20px;
 }
 
 .table {
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
     text-align: left;
-    border: 1px solid #ddd;
 }
 
 .email-id-default {
@@ -26,7 +24,61 @@
     text-align: left;
 }
 
-.response {
-    margin-top: 20px;
+.description-box {
+    text-align: left;
+    margin: 0;
+}
+
+.owner-box {
+    text-align: left;
+    margin: 0;
+    color: #0077E9;
+    font-family: 'Fira Code';
+}
+
+.table-title {
+    text-align: left;
+    padding-bottom:10px;
+}
+
+.MuiPaper-root {
     margin-bottom: 20px;
+}
+
+.MuiTable-root {
+    border: 1px solid #365069
+}
+
+.MuiCardContent-root {
+    padding: 16px;
+}
+
+.MuiTableCell-head {
+    background-color: #365069;
+}
+
+.MuiTableCell-root {
+    border-bottom: 1px solid #365069;
+}
+
+.completion-status {
+    text-align: center;
+    background-color: #9BF88B;
+    border-radius: 10px;
+    width: auto;
+    margin-left: 20px;
+    margin-right: 20px;
+    font-weight: bold;
+    padding: 5px 0px;
+}
+
+.completion-status-failure {
+    text-align: center;
+    background-color: #FFA1A1;
+    border-radius: 10px;
+    width: auto;
+    margin-left: 20px;
+    margin-right: 20px;
+    font-weight: bold;
+    padding: 5px 0px;
 }
