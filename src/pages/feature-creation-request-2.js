@@ -367,9 +367,23 @@ const FeatureCreationRequest2 = () => {
                 </div>
 
             </div>
-            <Button variant='contained' style={{ marginTop: '20px', backgroundColor: '#D7F9CB', color: '#117D00', border: '1px solid #117D00', fontWeight: 'bold' }}
+            <Button
+                className='submit-button'
+                variant='contained'
+                style={{
+                    position: 'fixed',
+                    bottom: '20px',
+                    right: '20px',
+                    backgroundColor: '#D7F9CB',
+                    color: '#117D00',
+                    border: '1px solid #117D00',
+                    fontWeight: 'bold',
+                }}
                 onClick={handleSubmitClick}
-            >Submit</Button>
+            >
+                Submit
+            </Button>
+
             <Snackbar open={open} autoHideDuration={4000} onClose={handleClose}>
                 <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
                     Feature Creation Request Submitted Successfully!

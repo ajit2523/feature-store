@@ -94,7 +94,7 @@ const FeatureCreationRequest = () => {
               .then(data => {
                 setRunHistoryData(data);
               });
-              console.log(featureGenID)
+            console.log(featureGenID)
           }}
           styles={{
             menu: (provided) => ({
@@ -152,7 +152,7 @@ const FeatureCreationRequest = () => {
                         <StyledTableRow
                           key={featureGroupID}
                         >
-                          <StyledTableCell component="th" scope="row" sx={{maxWidth:'300px'}}>
+                          <StyledTableCell component="th" scope="row" sx={{ maxWidth: '300px' }}>
                             {featureGroupID}
                           </StyledTableCell>
                           <StyledTableCell align="left" sx={{ fontFamily: 'Fira Code', maxWidth: '300px', overflow: 'auto', textOverflow: 'clip', whiteSpace: 'wrap' }}>{featureGroup.SQL_QUERY}</StyledTableCell>
@@ -168,7 +168,7 @@ const FeatureCreationRequest = () => {
         )}
 
         {selectedFeatureGenID && selectedFeatureGenData && !runHistoryData && (
-          <CircularProgress color='inherit'/>
+          <CircularProgress color='inherit' />
         )}
 
         {selectedFeatureGenID && selectedFeatureGenData && runHistoryData && (
@@ -217,21 +217,27 @@ const FeatureCreationRequest = () => {
         )}
 
         {selectedFeatureGenID && runHistoryData && !runHistoryData.Ongoing &&
-          <Button variant='contained' style={{ backgroundColor: '#FFF7F5', color: '#E24426', fontFamily: 'Poppins', marginTop: '20px', border: '1px solid #E24426', borderRadius: '10px', width: '100px', fontWeight: 'bold' }}
+          <Button className='next-button' variant='contained' style={{
+            backgroundColor: '#FFF7F5', color: '#E24426', fontFamily: 'Poppins', marginTop: '20px', border: '1px solid #E24426', borderRadius: '10px', width: '100px', fontWeight: 'bold', position: 'fixed',
+            bottom: '20px',
+            right: '20px',
+          }}
             onClick={handleClick}>
             Next
           </Button>
         }
 
         {selectedFeatureGenID && runHistoryData && runHistoryData.Ongoing &&
-          <Button variant='outlined' style={{ backgroundColor: '#F2F2F2', color: '#E24426', fontFamily: 'Poppins', marginTop: '20px' }}
+          <Button className='next-button' variant='outlined' style={{ backgroundColor: '#F2F2F2', color: '#E24426', fontFamily: 'Poppins', marginTop: '20px', float: 'right', position: 'fixed',
+          bottom: '20px',
+          right: '20px', }}
             onClick={handleClick}
             disabled
           >
             Next
           </Button>
         }
-        
+
       </div>
 
     </>
