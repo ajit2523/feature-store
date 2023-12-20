@@ -1,275 +1,246 @@
-import axios from 'axios';
-import { useState, useEffect } from 'react';
-import AsyncSelect from 'react-select/async';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './feature-creation-request.css';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { components } from 'react-select';
+import Select from 'react-select';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
+import TableRow, { tableRowClasses } from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { Button } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import CircularProgress from '@mui/material/CircularProgress';
 
-const featureGenIDOptions = [
-  {
-    FeatureGenID: 'ETP_DEROGS_BATCH',
-    FeatureGroups: [
-      'DEROGS_FEATURES_ETP'
-    ],
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    color: theme.palette.common.white,
+    fontFamily: 'Fira Code'
   },
-  {
-    FeatureGenID: 'NTP_PARTNER_DEROGS_BATCH',
-    FeatureGroups: ['PARTNER_DEROGS_NTP'],
-  },
-];
-
-const genIdOptions = featureGenIDOptions.map((featureGenIDOption) => ({
-  value: featureGenIDOption.FeatureGenID,
-  label: featureGenIDOption.FeatureGenID,
+  [`&.${tableCellClasses.body}`]: {
+    borderBottom: '1px solid #365069',
+    borderRight: '1px solid #365069',
+    fontFamily: 'Fira Code'
+  }
 }));
 
-const emailIdOptions = [
-  { value: 'vidit.ostwal@piramal.com', label: 'vidit.ostwal@piramal.com' },
-  { value: 'nirmalya.mukherjee@piramal.com', label: 'nirmalya.mukherjee@piramal.com' },
-  { value: 'yajamanyam.darahaas@piramal.com', label: 'yajamanyam.darahaas@piramal.com' },
-  { value: 'subramanian.v@piramal.com', label: 'subramanian.v@piramal.com' },
-  { value: 'kaushik.deb@piramal.com', label: 'kaushik.deb@piramal.com' }
-];
-
-const defaultEmailID = 'ajit.bhosale@piramal.com';
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#ea4022',
-    },
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  '&:nth-of-type(odd)': {
+    backgroundColor: theme.palette.action.hover,
   },
-});
+  [`&.${tableRowClasses.root}`]: {
+    borderBottom: '1px solid #365069',
 
-const FeatureCreationRequest = () => {
+  },
+}));
+
+const DropdownIndicator = (props) => {
+  return (
+    <components.DropdownIndicator {...props}>
+      <b>Feature Gen ID</b>
+    </components.DropdownIndicator>
+  );
+};
+
+const IndicatorsContainer = (props) => {
+  return (
+    <components.IndicatorsContainer {...props} style={{ justifyContent: 'center' }} />
+  );
+};
+
+
+
+
+const FeatureCreationRequest = ({ data }) => {
   const [featureGenID, setFeatureGenID] = useState();
-  const [featureGroups, setFeatureGroups] = useState([]);
-  const [emailID, setEmailID] = useState([defaultEmailID]);
-  const [batchIDs, setBatchIDs] = useState({});
-  const [response, setResponse] = useState(null);
+  const [selectedFeatureGenID, setSelectedFeatureGenID] = useState();
+  const [runHistoryData, setRunHistoryData] = useState(null);
 
-  const fetchFeatureGroups = (selectedFeatureGenID) => {
-    const selectedOption = featureGenIDOptions.find(
-      (option) => option.FeatureGenID === selectedFeatureGenID
-    );
+  const genIDOptions = data.FEATURE_GEN_ID.GEN_ID_LIST.map((featureGenIDOption) => ({
+    value: featureGenIDOption,
+    label: featureGenIDOption,
+  }));
 
-    return selectedOption ? selectedOption.FeatureGroups : [];
-  };
+  const selectedFeatureGenData = selectedFeatureGenID
+    ? data.FEATURE_GEN_ID[selectedFeatureGenID]
+    : null;
 
-  useEffect(() => {
-    console.log(featureGenID);
-    setFeatureGroups(fetchFeatureGroups(featureGenID));
-  }, [featureGenID]);
-
-  useEffect(() => {
-    console.log(featureGroups);
-    setBatchIDs({});
-  }, [featureGroups]);
-
-  useEffect(() => {
-    console.log(emailID);
-  }, [emailID]);
-
-  const handleEmailIDChange = (selectedOptions) => {
-    const selectedEmailIDs = selectedOptions.map((x) => x.value);
-    selectedEmailIDs.unshift(defaultEmailID);
-    setEmailID(selectedEmailIDs);
-  };
-
-  const filterEmailIdOptions = (inputValue) => {
-    return emailIdOptions.filter(i =>
-      i.label.toLowerCase().includes(inputValue.toLowerCase())
-    );
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate('/feature-creation-request-2', { state: { featureGenID: featureGenID } });
   }
 
-  const handleBatchIDChange = (featureGroup, batchID) => {
-    setBatchIDs((prevBatchIDs) => ({
-      ...prevBatchIDs,
-      [featureGroup]: batchID,
-    }));
-  };
-
-  const handleSubmit = () => {
-    // Check if batch IDs are saved for all feature groups
-    const isBatchIDsComplete = featureGroups.every(
-      (featureGroup) => batchIDs[featureGroup]
-    );
-
-    if (!isBatchIDsComplete) {
-      alert('Please enter batch IDs for all the feature groups.');
-      return;
-    }
-
-    const featureGroupsData = {};
-    featureGroups.forEach((featureGroup) => {
-      featureGroupsData[featureGroup] = batchIDs[featureGroup] || '';
-    });
-
-    const postData = {
-      uniqueIdentifier: featureGroupsData,
-      email: defaultEmailID,
-      // secondaryEmail: emailID.slice(1),
-      featureGenID: featureGenID,
-    };
-
-    console.log(postData);
-
-
-    axios
-      .post('https://biuprodapi.piramalfinance.com/feature-store/feature-store-resource', postData)
-      .then(
-        (response) => {
-          setResponse(response.data);
-          console.log(response);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-  };
-
   return (
-    <div className="feature-creation-request">
-      <AsyncSelect
-        className="feature-dropdown"
-        cacheOptions
-        loadOptions={(inputValue, callback) => {
-          setTimeout(() => {
-            callback(
-              genIdOptions.filter((i) =>
-                i.label.toLowerCase().includes(inputValue.toLowerCase())
-              )
-            );
-          }, 0);
-        }}
-        onChange={(selectedOption) => {
-          setFeatureGenID(selectedOption ? selectedOption.value : '');
-        }}
-        placeholder="Select Feature Gen ID"
-        noOptionsMessage={() => 'Start typing to find the feature creation ID'}
-        isClearable
-        backspaceRemovesValue
-        styles={{
-          menu: (provided) => ({
-            ...provided,
-            zIndex: 1001,
-            position: 'relative',
-          }),
-        }}
-      />
+    <>
+      <div className="feature-creation-request">
 
-      {/* Make a table with two columns. One for feature group, another for batch id. For each feature group, user will input the batch id in the table */}
-      {featureGroups.length > 0 &&
-        <TableContainer component={Paper} className='table'>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table" size='small'>
-            <TableHead>
-              {/* add border to table head */}
-              <TableRow>
-                <TableCell align='center' sx={{ backgroundColor: '#FAEEEE', color: '#CB0000' }}><h3>Feature Group</h3></TableCell>
-                <TableCell align="center" sx={{ backgroundColor: '#FAEEEE', color: '#CB0000' }}><h3>Batch ID</h3></TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {featureGroups.map((featureGroup) => (
-                <TableRow
-                  key={featureGroup}
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row" align='center'>
-                    {featureGroup}
-                  </TableCell>
-                  <TableCell align="center">
-                    <TextField
-                      id={`batch-id-${featureGroup}`}
-                      label="Batch ID"
-                      fullWidth
-                      value={batchIDs[featureGroup] || ''}
-                      onChange={(event) =>
-                        handleBatchIDChange(featureGroup, event.target.value)
-                      }
-                      size="small"
-                      variant="outlined"
-                    />
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>}
+        <Select
+          className='feature-gen-id-dropdown'
+          cacheOptions
+          components={{ DropdownIndicator, IndicatorsContainer }}
+          options={genIDOptions}
+          placeholder="Start typing the feature generation ID and select from the dropdown menu"
+          isSearchable
+          backspaceRemovesValue
+          onChange={(selectedOption) => {
+            setFeatureGenID(selectedOption ? selectedOption.value : '');
+            setSelectedFeatureGenID(selectedOption ? selectedOption.value : '');
+            fetch(`https://jj8gswywya.execute-api.ap-south-1.amazonaws.com/api/v1/fs-ui/last-runs/${selectedOption.value}`)
+              .then(response => response.json())
+              .then(data => {
+                setRunHistoryData(data);
+              });
+            console.log(featureGenID)
+          }}
+          styles={{
+            menu: (provided) => ({
+              ...provided,
+              zIndex: 1001,
+              position: 'relative',
+            }),
+          }}
+          theme={(theme) => ({
+            ...theme,
+            border: 0,
+            colors: {
+              ...theme.colors,
+              primary25: '#D9D9D9',
+              primary: '#717171',
+            },
+          })}
+        />
 
-      <Box
-        className="email-id-default"
-        component="form"
-        sx={{
-          '& .MuiTextField-root': { width: '100%' },
-        }}
-        noValidate
-        autoComplete="off"
-      >
-        <>
-          <TextField
+
+        {featureGenID &&
+          <Card variant='outlined' className='desc-card'>
+            <CardContent>
+              <div>
+                <p className='description-box'><b>Description</b><br />
+                  {selectedFeatureGenData ? selectedFeatureGenData.DESCRIPTION : ''}</p>
+                <hr />
+                <p className='owner-box'><b style={{ color: 'black', fontFamily: 'Poppins' }}>Owners</b><br />
+                  {selectedFeatureGenData ? selectedFeatureGenData.OWNER.join(', ') : ''}</p>
+
+              </div>
+            </CardContent>
+          </Card>}
+
+        {selectedFeatureGenID && selectedFeatureGenData && (
+          <div className='table'>
+            <div className='table-title'>
+              <b>Feature Groups in {selectedFeatureGenID}</b>
+            </div>
+
+
+            <div className='feature-group-table'>
+              <TableContainer component={Paper}>
+                <Table aria-label="simple table">
+                  <TableHead>
+                    <TableRow>
+                      <StyledTableCell><b>Feature Group</b></StyledTableCell>
+                      <StyledTableCell align="left" ><b>Input Query</b></StyledTableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {selectedFeatureGenData.GROUP_IDS.map((featureGroupID) => {
+                      const featureGroup = data.FEATURE_GROUPS[featureGroupID];
+                      return (
+                        <StyledTableRow
+                          key={featureGroupID}
+                        >
+                          <StyledTableCell component="th" scope="row" sx={{ maxWidth: '300px' }}>
+                            {featureGroupID}
+                          </StyledTableCell>
+                          <StyledTableCell align="left" sx={{ fontFamily: 'Fira Code', maxWidth: '300px', overflow: 'auto', textOverflow: 'clip', whiteSpace: 'wrap' }}>{featureGroup.SQL_QUERY}</StyledTableCell>
+                        </StyledTableRow>
+                      );
+                    })}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </div>
+
+          </div>
+        )}
+
+        {selectedFeatureGenID && selectedFeatureGenData && !runHistoryData && (
+          <CircularProgress color='inherit' />
+        )}
+
+        {selectedFeatureGenID && selectedFeatureGenData && runHistoryData && (
+          <div className='table'>
+            <div className='table-title'>
+              <b>Run History : Showing last {runHistoryData.Showing} runs</b>
+            </div>
+
+
+            <div className='feature-group-table'>
+              <TableContainer component={Paper}>
+                <Table aria-label="simple table">
+                  <TableHead>
+                    <TableRow>
+                      <StyledTableCell align="left"><b>Run ID</b></StyledTableCell>
+                      <StyledTableCell align="left"><b>Run Timestamp</b></StyledTableCell>
+                      <StyledTableCell align="left"><b>Completion Status</b></StyledTableCell>
+                      <StyledTableCell align="left"><b>Submitted By</b></StyledTableCell>
+                      <StyledTableCell align="left"><b>Comments</b></StyledTableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {runHistoryData['Run ID'] && runHistoryData.Timestamp && runHistoryData['Completion Status'] && runHistoryData['Submitted By'] && runHistoryData['Run ID'].length > 0 &&
+                      runHistoryData['Run ID'].map((runID, index) => (
+                        <StyledTableRow key={runID} >
+                          <StyledTableCell component="th" scope="row">
+                            {runID}
+                          </StyledTableCell>
+                          <StyledTableCell align="left">{runHistoryData.Timestamp[index]}</StyledTableCell>
+                          <StyledTableCell align='center' ><div className={runHistoryData['Completion Status'][index] === 'Success' ? 'completion-status' : 'completion-status-failure'}>
+                            {runHistoryData['Completion Status'][index]}
+                          </div>
+                          </StyledTableCell>
+                          <StyledTableCell align="left">{runHistoryData['Submitted By'][index]}</StyledTableCell>
+                          {/* Add a cell for Comments based on your data structure */}
+                          <StyledTableCell align="left">{/* runHistoryData.Comments[index] */}</StyledTableCell>
+                        </StyledTableRow>
+                      ))
+                    }
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </div>
+
+          </div>
+        )}
+
+        {selectedFeatureGenID && runHistoryData && !runHistoryData.Ongoing &&
+          <Button className='next-button' variant='contained' style={{
+            backgroundColor: '#FFF7F5', color: '#E24426', fontFamily: 'Poppins', marginTop: '20px', border: '1px solid #E24426', borderRadius: '10px', width: '100px', fontWeight: 'bold', position: 'fixed',
+            bottom: '20px',
+            right: '20px',
+          }}
+            onClick={handleClick}>
+            Next
+          </Button>
+        }
+
+        {selectedFeatureGenID && runHistoryData && runHistoryData.Ongoing &&
+          <Button className='next-button' variant='outlined' style={{ backgroundColor: '#F2F2F2', color: '#E24426', fontFamily: 'Poppins', marginTop: '20px', float: 'right', position: 'fixed',
+          bottom: '20px',
+          right: '20px', }}
+            onClick={handleClick}
             disabled
-            id="outlined-disabled"
-            label="default"
-            defaultValue={defaultEmailID}
-            size="small"
-          />
-        </>
-      </Box>
+          >
+            Next
+          </Button>
+        }
 
-      <AsyncSelect
-        className="feature-dropdown"
-        cacheOptions
-        loadOptions={(inputValue, callback) => {
-          setTimeout(() => {
-            callback(
-              filterEmailIdOptions(inputValue).filter(
-                (option) => option.value !== defaultEmailID
-              )
-            );
-          }, 0);
-        }}
-        onChange={handleEmailIDChange}
-        isMulti
-        placeholder="Select secondary email ID"
-        backspaceRemovesValue
-        styles={{
-          menu: (provided) => ({
-            ...provided,
-            zIndex: 1001,
-            position: 'relative',
-          }),
-        }}
-      />
+      </div>
 
-      <ThemeProvider theme={theme}>
-        <Button
-          variant="contained"
-          className="submit-button"
-          onClick={handleSubmit}
-        >
-          Submit
-        </Button>
-      </ThemeProvider>
-
-      {response && (
-        <div className="response">
-          <Box sx={{ border: 1, borderRadius: 1.5, borderColor: 'grey' }}>
-            <h3>Response</h3>
-            <pre>{JSON.stringify(response, null, 2)}</pre>
-          </Box>
-        </div>
-      )}
-    </div>
+    </>
   );
 };
 

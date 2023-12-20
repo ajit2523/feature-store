@@ -39,6 +39,7 @@ const SideNav = () => {
             </Link>
           </ul>
         </div>
+        <hr className='hr' />
         <div className="group">
           <h2>ML-OPS</h2>
           <ul>
@@ -59,6 +60,7 @@ const SideNav = () => {
             </Link>
           </ul>
         </div>
+        <hr className='hr' />
         <div className="group">
           <h2>HISTORY / PERFORMANCE</h2>
           <ul>

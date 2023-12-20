@@ -1,27 +1,28 @@
 /* SideNav.css */
 .side-nav {
-    width: 350px;
+    width: 305px;
     background-color: #ffffff;
     height: 100vh;
     border-right: 0.8px solid #E2E2E2;
     text-align: left;
-    box-shadow: 4px 0px 20px 0px #00000033;
 }
 
 .group {
     margin-bottom: 20px;
     width: 100%;
+    font-family: 'Open Sans', sans-serif;
+
     
 }
 
 .group h2 {
     margin: 0;
-    padding: 10px 0px 10px 0px;
-    font-size: 15px;
+    padding: 10px 0px 10px 18px;
+    font-family: 'Lato', sans-serif;
+    font-size: 18px;
     font-weight: bold;
-    color: #000;
-    background-color: #FAEEEE;
-    padding-left: 35px;
+    color: #353535;
+    background-color: #FFF;
 }
 
 ul {
@@ -42,16 +43,16 @@ a:hover {
 }
 
 li {
-    font-weight: bold;
-    font-size: 15px;
+    font-size: 16px;
     padding: 8px 0;
     cursor: pointer;
-    color: #2B2525;
-    background-color: #EEEEEE;
+    color: #365069;
+    background-color: #F7F7FA;
     width: 100% - 10px;
     padding-left: 10px;
     border-radius: 10px;
-    margin:0px 10px 10px 10px;
+    margin:0px 18px 10px 18px;
+    border: 1px solid #36506914
     
 }
 
@@ -62,12 +63,19 @@ li {
 }
 
 li:hover {
-    color: #FF0000;
-    background-color: #FDDCD7;
+    color: #E24426;
+    font-weight: bold;
+    background-color: #FFF7F5;
+    border: 1px solid #E24426
 }
 
 .active {
-    color: #FF0000;
-    background-color: #FDDCD7;
+    color: #E24426;
+    font-weight: bold;
+    background-color: #FFF7F5;
+    border: 1px solid #E24426
 }
 
+.hr {
+    border: 1px solid #D9D9D9
+}

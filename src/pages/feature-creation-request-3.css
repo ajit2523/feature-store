@@ -1,0 +1,74 @@
+h2{
+    padding-left: 15px;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+}
+
+.run-id {
+    display: flex;
+    align-items: center;
+}
+
+.cloudwatch-link {
+    display: flex;
+    align-items: center;
+}
+
+.copy-button {
+    border: 0;
+    padding: 0;
+    background-color: inherit;
+}
+
+
+.check{
+    color: green;
+    font-size: 2.5em;
+}
+
+.copy-icon {
+    font-size: 2em;
+    color:black;
+}
+
+.link-icon {
+    font-size: 2em;
+    color:black;
+}
+
+.link {
+    color: #00359D;
+}
+
+
+
+.grid-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.grid-item {
+    flex: 1 1 auto; /* Adjust flex properties based on your content */
+    min-width: 0; /* Allow items to shrink beyond their content width */
+    box-sizing: border-box;
+    border: 1px solid #ddd; /* Optional: Add borders for better visualization */
+    padding: 10px; /* Optional: Add padding for better spacing */
+}
+
+.empty-item {
+    flex-basis: 100%; /* Force the empty item to take 100% of the row width */
+}
+
+
+.start-time {
+    padding-left: 40px;
+}
+
+.tab-redirect {
+    color: #FF0000;
+}
+
+
