@@ -1,8 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './feature-creation-request.css';
-import { components, DropdownIndicatorProps, IndicatorsContainerProps } from 'react-select';
-import data from '../db.json';
+import { components } from 'react-select';
 import Select from 'react-select';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -53,17 +52,18 @@ const IndicatorsContainer = (props) => {
   );
 };
 
-const genIDOptions = data.FEATURE_GEN_ID.GEN_ID_LIST.map((featureGenIDOption) => ({
-  value: featureGenIDOption,
-  label: featureGenIDOption,
-}));
 
 
-const FeatureCreationRequest = () => {
+
+const FeatureCreationRequest = ({ data }) => {
   const [featureGenID, setFeatureGenID] = useState();
-  const [featureGroups, setFeatureGroups] = useState([]);
   const [selectedFeatureGenID, setSelectedFeatureGenID] = useState();
   const [runHistoryData, setRunHistoryData] = useState(null);
+
+  const genIDOptions = data.FEATURE_GEN_ID.GEN_ID_LIST.map((featureGenIDOption) => ({
+    value: featureGenIDOption,
+    label: featureGenIDOption,
+  }));
 
   const selectedFeatureGenData = selectedFeatureGenID
     ? data.FEATURE_GEN_ID[selectedFeatureGenID]
@@ -89,7 +89,7 @@ const FeatureCreationRequest = () => {
           onChange={(selectedOption) => {
             setFeatureGenID(selectedOption ? selectedOption.value : '');
             setSelectedFeatureGenID(selectedOption ? selectedOption.value : '');
-            fetch(`http://localhost:5050/api/v1/fs-ui/last-runs/${selectedOption.value}`)
+            fetch(`https://jj8gswywya.execute-api.ap-south-1.amazonaws.com/api/v1/fs-ui/last-runs/${selectedOption.value}`)
               .then(response => response.json())
               .then(data => {
                 setRunHistoryData(data);

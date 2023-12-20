@@ -15,7 +15,6 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { components, DropdownIndicatorProps, IndicatorsContainerProps } from 'react-select';
 import { RiArrowDropDownLine } from "react-icons/ri";
-import data from '../db.json';
 
 
 

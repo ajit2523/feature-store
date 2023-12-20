@@ -1,7 +1,5 @@
 import Select from 'react-select'
-import TablePagination from '@mui/material/TablePagination';
 import { useState, useEffect } from 'react';
-import data from '../db.json';
 import './feature-store-metadata.css';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -39,24 +37,26 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
-const genIDOptions = data.FEATURE_GEN_ID.GEN_ID_LIST.map((featureGenIDOption) => ({
-    value: featureGenIDOption,
-    label: featureGenIDOption,
-}));
-
-const featureGroups = data.FEATURE_GROUPS;
-const groupIDOptions = Object.keys(featureGroups).map((groupID) => ({
-    value: groupID,
-    label: groupID,
-}));
 
 
 
-const FeatureStoreMetadata = () => {
+
+const FeatureStoreMetadata = ({ data }) => {
     const [featureGenID, setFeatureGenID] = useState(null);
     const [featureGroup, setFeatureGroup] = useState(null);
     const [featureGenData, setFeatureGenData] = useState(null);
     const [featureGroupData, setFeatureGroupData] = useState(null);
+
+    const genIDOptions = data.FEATURE_GEN_ID.GEN_ID_LIST.map((featureGenIDOption) => ({
+        value: featureGenIDOption,
+        label: featureGenIDOption,
+    }));
+    
+    const featureGroups = data.FEATURE_GROUPS;
+    const groupIDOptions = Object.keys(featureGroups).map((groupID) => ({
+        value: groupID,
+        label: groupID,
+    }));
 
     useEffect(() => {
         if (featureGenID) {

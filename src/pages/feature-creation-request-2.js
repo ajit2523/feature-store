@@ -5,14 +5,13 @@ import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
-import TableRow, { tableRowClasses } from '@mui/material/TableRow';
+import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Chip from '@mui/material/Chip';
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
-import data from '../db.json';
 import './feature-creation-request-2.css';
 import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
@@ -22,7 +21,10 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { FaCheckCircle } from 'react-icons/fa';
 import { RxCrossCircled } from "react-icons/rx";
 
-const defaultEmailID = 'ajit.bhosale@piramal.com'
+let defaultEmailID = 'ajit.bhosale@piramal.com'
+export const setEmail = (email) => {
+    defaultEmailID = email;
+};
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -36,21 +38,21 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     }
 }));
 
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    '&:nth-of-type(odd)': {
-        backgroundColor: theme.palette.action.hover,
-    },
-    [`&.${tableRowClasses.root}`]: {
-        borderBottom: '1px solid #365069',
+// const StyledTableRow = styled(TableRow)(({ theme }) => ({
+//     '&:nth-of-type(odd)': {
+//         backgroundColor: theme.palette.action.hover,
+//     },
+//     [`&.${tableRowClasses.root}`]: {
+//         borderBottom: '1px solid #365069',
 
-    },
-}));
+//     },
+// }));
 
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-const FeatureCreationRequest2 = () => {
+const FeatureCreationRequest2 = ({ data }) => {
 
     const [emailIdList, setEmailIdList] = useState([{ emailID: '' }]);
     const [open, setOpen] = useState(false);
@@ -79,7 +81,7 @@ const FeatureCreationRequest2 = () => {
             console.log(requestBody)
             console.log(JSON.stringify(requestBody));
 
-            const response = await fetch('http://localhost:5050/api/v1/fs-ui/submit-feature-gen-request', {
+            const response = await fetch('https://jj8gswywya.execute-api.ap-south-1.amazonaws.com/api/v1/fs-ui/submit-feature-gen-request', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -172,7 +174,7 @@ const FeatureCreationRequest2 = () => {
             };
             console.log(validationRequestBody);
 
-            const response = await fetch('http://localhost:5050/api/v1/fs-ui/validate-queries', {
+            const response = await fetch('https://jj8gswywya.execute-api.ap-south-1.amazonaws.com/api/v1/fs-ui/validate-queries', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
